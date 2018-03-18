@@ -43,17 +43,18 @@ const initialState = {
   feeds: List()
 };
 
-const FeedRecord = Map({
-    id: initialState.feed_id++,
+const Feed = Map({
+    id: 0,
     author: "",
     title: "",
     content: "",
     like: false,
     like_count: 0,
-    comments: List()
+    comments: List(),
+    comment_id: 0,
 })
 
-const CommentRecord = Map({
+const Comment = Map({
   id: 0,
   author: "",
   comment: "",
@@ -61,21 +62,26 @@ const CommentRecord = Map({
 })
 
 export default handleActions({
-  [CLICK_LIKE]: (state, action) => {
-    const index = action.payload;
-    const feed = state.get('feeds', index);
-    
-    feed.update('like_count',  value => feed.like ? value - 1: value + 1),
-    feed.update('like', value => !feed.like);
-  },
+  // OK
+  [CLICK_LIKE]: (state, {payload : index}) => state.updateIn(['feeds', index, 'like'], like => !like),
   
+  // OK
   [ADD_FEED]: (state, action) => {
     const { id, author, title, content } = action.payload;
-    const feed = FeedRecord({id: id++, author, title, content});
+    const { feed_id } = state.get('feed_id');
     
-    state.update('feeds', feeds => feeds.push(feed)) 
+    const feed = Feed({
+      id: feed_id++, 
+      author, 
+      title, 
+      content
+    });
+    
+    return state.update('feed_id', id => id++)
+                .update('feeds', feeds => feeds.push(feed)) 
   },
   
+  // OK
   [DELETE_FEED]: (state, {payload: id}) => {
     const index = state.get('feeds').findIndex(item => item.get('id') === id);
     
@@ -84,20 +90,32 @@ export default handleActions({
   
   // action 객체를 참조하지 않으니까 이렇게 생략을 할 수도 있겠죠?
   // state 부분에서 비구조화 할당도 해주어서 코드를 더욱 간소화시켰습니다.
-  [CHANGE_COMMENT]: (state, action) => state.set('comment_input', action.payload),
+  // OK
+  [CHANGE_COMMENT]: (state, {payload: input}) => state.set('comment_input', input),
   
   // TODO:: Feed의 아이디를 찾아서 Comment 대입
+  // OK
   [WRITE_COMMENT]: (state, action) => {
     const { feed_id, author, text } = action.payload;
-    const item = CommentRecord({id: feed_id.comments.length()+1, author, text});
+    const comment_id = state.getIn(['feeds', feed_id, 'comment_id']);
     
-    state.updateIn(['feeds', feed_id, 'comments'], comments => comments.push(item)) 
+    const item = Comment({
+      id: comment_id++,
+      author,
+      text
+    });
+    
+    return state.updateIn(['feeds', feed_id, 'comment_id'], id => id++)
+                .updateIn(['feeds', feed_id, 'comments'], comments => comments.push(item)) 
   },
   
   // TODO:: Feed의 아이디를 찾아서 Comment 대입
+  // OK
   [DELETE_COMMENT]: (state, action) => {
-    const fi = state.get('feeds').findIndex(item => item.get('feed_id') === action.payload.feed_id).fromJS()
-    const ci = state.getIn(['feeds', fi, 'comments']).findIndex(item => item.get('comment_id') === action.payload.comment_id).fromJS()
+    const { feed_id, comment_id } = action.payload;
+    
+    const fi = state.get('feeds').findIndex(item => item.get('feed_id') === feed_id)
+    const ci = state.getIn(['feeds', fi, 'comments']).findIndex(item => item.get('comment_id') === comment_id)
     
     state.deleteIn(['feeds', fi, 'comments', ci]);
   },

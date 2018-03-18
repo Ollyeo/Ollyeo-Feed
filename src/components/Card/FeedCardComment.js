@@ -1,10 +1,20 @@
 import React  from 'react'
-import { Input } from 'antd'
+import { Avatar } from 'antd'
 
-const FeedCardComment = ({profile, comment, onChange}) => {
+// Gutter => column과 column 사이의 간격정도
+
+const FeedCardComment = ({avatar, comment}) => {
     return (
-        <Input placeholder="댓글을 남겨주세요." onChange={onChange}>
-        </Input>
+        <div className="gutter">
+            <Row gutter={48}>
+                <Col className="gutter-row" span={4}>
+                    <Avatar src={avatar}/>
+                </Col>
+                <Col className="gutter-row" span={12}>
+                    <p>{comment}</p>
+                </Col> 
+            </Row>
+        </div>
     )
 }
 

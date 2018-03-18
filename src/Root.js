@@ -1,11 +1,16 @@
 import React from 'react';
-import store from './store' 
+import App from 'components/App';
 import { Provider } from 'react-redux';
 
-import App from './components/App';
+// react-router-dom
+// react-ga => react google analystics
 
-const Root = () => {
+const Root = ({store}) => {
     return (
-        <Provider store={
+        <Provider store={store}>
+            <App/>
+        </Provider>
     )
 }
+
+export default Root;

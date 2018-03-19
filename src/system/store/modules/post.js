@@ -1,4 +1,4 @@
-import { createAction, handleActions } from 'redux-actions';
+/*import { createAction, handleActions } from 'redux-actions';
 import { Record, List } from 'immutable';
 
 const CREATE = 'post/CREATE';
@@ -21,3 +21,4 @@ export default handleActions({
     return state.update('todos', todos => todos.push(item));
   },
 }, initialState);
+*/

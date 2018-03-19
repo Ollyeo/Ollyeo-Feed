@@ -71,7 +71,7 @@ export default handleActions({
     const { feed_id } = state.get('feed_id');
     
     const feed = Feed({
-      id: feed_id++, 
+      id: feed_id+1, 
       author, 
       title, 
       content
@@ -100,7 +100,7 @@ export default handleActions({
     const comment_id = state.getIn(['feeds', feed_id, 'comment_id']);
     
     const item = Comment({
-      id: comment_id++,
+      id: comment_id+1,
       author,
       text
     });

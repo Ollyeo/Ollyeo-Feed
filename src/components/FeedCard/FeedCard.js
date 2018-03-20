@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { FeedCardLike } from './FeedCardLike';
-import { FeedCardComment } from './FeedCardComment';
-import { Card, Avatar, Input } from 'antd';
+import FeedCardLike from './FeedCardLike';
+import FeedCardComment from './FeedCardComment';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// TODO ::
-import  * as feedActions from 'store/modules/feed';
+import { List } from 'immutable';
+
+import avatar from 'static/image/avatar-test.png'
+import cover from 'static/image/cover-test.jpg'
+
+import { Card, Avatar, Input } from 'antd';
 
 const { Meta, Grid } = Card;
 
@@ -35,12 +36,14 @@ class FeedCard extends Component{
             )
         );
         
+        const coverImg = <img src={cover}/>
+        const myAvatarComponent = <Avatar src={my_avatar}/>
+        
         return (
             <Card
-                loading
-                cover={cover}
+                cover={coverImg}
                 style = {{ width: 300 }}
-                actions={[<Avatar src={{my_avatar}}/>, <Input placeholder="댓글을 입력해 주세요."/>, <FeedCardLike />]}
+                actions={[myAvatarComponent, <Input placeholder="댓글을 입력해 주세요."/>, <FeedCardLike />]}
             >
                 <Meta
                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
@@ -53,12 +56,26 @@ class FeedCard extends Component{
     }
 }
 
+FeedCard.defaultProps = {
+    cover: {cover},
+    title: "No Title", 
+    description: "No Description",
+    my_avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+    author_avatar : {avatar},
+    top_comment: List()
+};
+
+export default FeedCard;
+
+
+/*
 export default connect(
     // state 를 비구조화 할당
     
     // https://velopert.com/3533
     // mapDispatchToProps를 사용하지않고 state를 미리 할당하는 방법 보기
     
+    // feed -> feed redux의 state
     ({ feed }) => ({
         cover: feed.get('cover'),
         title: feed.get('title'),
@@ -71,3 +88,4 @@ export default connect(
         FeedActions: bindActionCreators(feedActions, dispatch)
     })
 )(FeedCard);
+*/

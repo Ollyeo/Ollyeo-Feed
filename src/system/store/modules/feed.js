@@ -37,11 +37,11 @@ export const add_feed = () => createAction(ADD_FEED);
 export const remove_feed = () => createAction(DELETE_FEED);
 
 // 모듈의 초기 상태를 정의합니다.
-const initialState = {
+const initialState = Map({
   feed_id: 0,
   comment_input:'',
   feeds: List()
-};
+});
 
 const Feed = Map({
     id: 0,

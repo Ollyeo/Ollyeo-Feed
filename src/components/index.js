@@ -1,6 +1,5 @@
-import React from 'react';
-import { App } from './App/App'
-import { FeedCard } from './Card/FeedCard'
+import App from './App/App.js'
+import FeedCard from './FeedCard/FeedCard.js'
 //import { DetailCard } from './DetailCard/DetailCard'
 //import { Post } from './Post/Post'
 

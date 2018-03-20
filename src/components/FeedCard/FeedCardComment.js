@@ -1,5 +1,5 @@
 import React  from 'react'
-import { Avatar } from 'antd'
+import { Avatar, Row, Col } from 'antd'
 
 // Gutter => column과 column 사이의 간격정도
 

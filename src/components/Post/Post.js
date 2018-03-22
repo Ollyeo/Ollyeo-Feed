@@ -1,60 +1,25 @@
 import React, { Component } from 'react';
-import { Button, Modal, Form, Input, Radio } from 'antd';
+import PostForm from './PostForm';
 
-const FormItem = Form.Item;
+import { Button, Icon } from 'antd';
 
-const CollectionCreateForm = Form.create()(
-  class extends Component {
-    render() {
-      const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
-      return (
-        <Modal
-          visible={visible}
-          title="Create a new collection"
-          okText="Create"
-          onCancel={onCancel}
-          onOk={onCreate}
-        >
-          <Form layout="vertical">
-            <FormItem label="Title">
-              {getFieldDecorator('title', {
-                rules: [{ required: true, message: 'Please input the title of collection!' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-            <FormItem label="Description">
-              {getFieldDecorator('description')(<Input type="textarea" />)}
-            </FormItem>
-            <FormItem className="collection-create-form_last-form-item">
-              {getFieldDecorator('modifier', {
-                initialValue: 'public',
-              })(
-                <Radio.Group>
-                  <Radio value="public">Public</Radio>
-                  <Radio value="private">Private</Radio>
-                </Radio.Group>
-              )}
-            </FormItem>
-          </Form>
-        </Modal>
-      );
-    }
-  }
-);
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { FeedActions, PostActions } from 'system/store/actionCreators';
 
 class Post extends Component {
-  state = {
-    visible: false,
-  };
+ 
   showModal = () => {
-    this.setState({ visible: true });
+    PostActions.open();
   }
   handleCancel = () => {
-    this.setState({ visible: false });
+    PostActions.close();
   }
+  
   handleCreate = () => {
+    const { author, title, img, content } = this.props;
+    
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
@@ -62,26 +27,47 @@ class Post extends Component {
       }
 
       console.log('Received values of form: ', values);
+      FeedActions.add_feed(({author, title, content, img}))
       form.resetFields();
-      this.setState({ visible: false });
+      PostActions.close();
     });
   }
+  
   saveFormRef = (formRef) => {
     this.formRef = formRef;
   }
+  
   render() {
+    const { showModal, saveFormRef, handleCancel, handleCreate } = this;
+    const { visible } = this.props;
+    
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>New Collection</Button>
-        <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={this.handleCreate}
+        <Button type="primary"
+                shape="circle" 
+                icon="plus-circle" 
+                size={10}
+                onClick={showModal}/>
+        <PostForm
+          wrappedComponentRef={saveFormRef}
+          visible={visible}
+          onCancel={handleCancel}
+          onCreate={handleCreate}
         />
       </div>
     );
   }
 }
 
-export default Post;
+export default connect(
+    /*
+    {
+      author: post.get('author'),
+      title: post.get('title'),
+      files: post.get('files'),
+      content: post.get('content'),
+      visible: post.get('visible'),
+    }
+    */
+    (state) => (console.log(state))
+)(Post);

@@ -66,26 +66,3 @@ FeedCard.defaultProps = {
 };
 
 export default FeedCard;
-
-
-/*
-export default connect(
-    // state 를 비구조화 할당
-    
-    // https://velopert.com/3533
-    // mapDispatchToProps를 사용하지않고 state를 미리 할당하는 방법 보기
-    
-    // feed -> feed redux의 state
-    ({ feed }) => ({
-        cover: feed.get('cover'),
-        title: feed.get('title'),
-        description: feed.get('description'),
-        my_avatar: feed.get('my_avatar'),
-        author_avatar: feed.get('author_avatar'),
-        top_comment: feed.get('top_comment')// 전체comment에서 3개만 가져와
-    }),
-    (dispatch) => ({
-        FeedActions: bindActionCreators(feedActions, dispatch)
-    })
-)(FeedCard);
-*/

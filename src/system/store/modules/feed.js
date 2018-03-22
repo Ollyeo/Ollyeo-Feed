@@ -48,6 +48,7 @@ const Feed = Map({
     author: "",
     title: "",
     content: "",
+    img: "",
     like: false,
     like_count: 0,
     comments: List(),
@@ -67,14 +68,15 @@ export default handleActions({
   
   // OK
   [ADD_FEED]: (state, action) => {
-    const { id, author, title, content } = action.payload;
+    const { author, title, content, img } = action.payload;
     const { feed_id } = state.get('feed_id');
     
     const feed = Feed({
       id: feed_id+1, 
       author, 
       title, 
-      content
+      content,
+      img
     });
     
     return state.update('feed_id', id => id++)

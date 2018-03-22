@@ -7,26 +7,30 @@ import { bindActionCreators } from 'redux';
 import  * as feedActions from 'system/store/modules/feed';
 
 // static
-import avatar from 'static/image/avatar-test.png'
-import cover from 'static/image/cover-test.jpg'
-
 class FeedContainer extends Component {
     render(){
         const { feed_id, comment_input, feeds } = this.props;
         
-        const feedItems = feeds.map(
-            ({cover, title, description, my_avatar}) => (
+        const feedItems = feeds.toJS().map(
+            ({cover, 
+            title, 
+            description, 
+            my_avatar,
+            author_avatar}) => (
                 <FeedCard 
                     cover={cover} 
                     title={title} 
                     description={description} 
-                    my_avatar={avatar}
+                    my_avatar={my_avatar}
+                    author_avatar={author_avatar}
                 />
             )
-        )
+        );
         
         return(
-            { feedItems }
+            <div>
+                {feedItems}
+            </div>
         )
     }
 }

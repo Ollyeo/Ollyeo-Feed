@@ -3,6 +3,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { Map, List } from 'immutable';
 
+// 1. Action 이름 짓기
 const CLICK_LIKE = 'feed/CLICK_LIKE';
 const ADD_FEED = 'feed/ADD_FEED';
 const DELETE_FEED = 'feed/DELETE_FEED';
@@ -28,6 +29,7 @@ const WRITE_COMMENT = 'comment/WRITE_COMMENT';
   payload:(index)
 }
 */
+// 2. Action 함수 정의하기
 export const change_comment = () => createAction(CHANGE_COMMENT);
 export const write_comment = () => createAction(WRITE_COMMENT);
 export const delete_comment = () => createAction(DELETE_COMMENT)
@@ -62,6 +64,7 @@ const Comment = Map({
   create_at: new Date()
 })
 
+// 3. Action 함수 핸들링 하기
 export default handleActions({
   // OK
   [CLICK_LIKE]: (state, {payload : index}) => state.updateIn(['feeds', index, 'like'], like => !like),

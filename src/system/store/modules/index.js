@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import feed from './feed';
+import post from './post';
 //import feeddetail from './feeddetail';
-//import post from './post';
+
 
 export default combineReducers({
-    feed
+    feed,
+    post
 })

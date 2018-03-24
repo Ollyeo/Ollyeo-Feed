@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import PostForm from './PostForm';
-
-import { Button, Icon } from 'antd';
+import PostButton from './PostButton';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import { FeedActions, PostActions } from 'system/store/actionCreators';
 
 class Post extends Component {
  
   showModal = () => {
-    PostActions.open();
+    PostActions.open().then( () => console.log('success'))
+    .catch( () => console.log('error'));
   }
   handleCancel = () => {
     PostActions.close();
@@ -43,11 +42,7 @@ class Post extends Component {
     
     return (
       <div>
-        <Button type="primary"
-                shape="circle" 
-                icon="plus-circle" 
-                size={10}
-                onClick={showModal}/>
+        <PostButton onClick={() => { showModal }}/>
         <PostForm
           wrappedComponentRef={saveFormRef}
           visible={visible}
@@ -61,13 +56,13 @@ class Post extends Component {
 
 export default connect(
     /*
-    {
+
+    */
+    ({post}) => ({
       author: post.get('author'),
       title: post.get('title'),
       files: post.get('files'),
       content: post.get('content'),
       visible: post.get('visible'),
-    }
-    */
-    (state) => (console.log(state))
+    }),
 )(Post);

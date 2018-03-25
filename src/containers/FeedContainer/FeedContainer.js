@@ -16,8 +16,10 @@ class FeedContainer extends Component {
             title, 
             description, 
             my_avatar,
-            author_avatar}) => (
+            author_avatar}, key) => (
+                console.log(title),
                 <FeedCard 
+                    key={key}
                     cover={cover} 
                     title={title} 
                     description={description} 

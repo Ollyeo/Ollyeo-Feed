@@ -15,10 +15,10 @@ class PostForm extends Component {
     
     createFeed = () => {
         const  { author, 
-    title,
-    img ,
-    content,
-    visible} = this.props;
+                title,
+                img ,
+                content,
+                visible} = this.props;
     }
     
     render() {

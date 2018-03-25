@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PostForm from './PostForm';
 import PostButton from './PostButton';
 
-import { bindActionCreators } from 'redux';
-
 import { connect } from 'react-redux';
 
 import { FeedActions, PostActions } from 'system/store/actionCreators';
@@ -11,8 +9,6 @@ import { FeedActions, PostActions } from 'system/store/actionCreators';
 class Post extends Component {
  
   showModal = () => {
-    console.log("showModal")
-    
     PostActions.open();
   }
   
@@ -21,19 +17,34 @@ class Post extends Component {
   }
   
   handleCreate = () => {
-    const { author, title, img, content } = this.props;
+    const { author, title, content, img } = this.props;
     
     const form = this.formRef.props.form;
+    /*
     form.validateFields((err, values) => {
       if (err) {
         return;
       }
 
       console.log('Received values of form: ', values);
-      FeedActions.add_feed(({author, title, content, img}))
-      form.resetFields();
-      PostActions.close();
-    });
+
+    });*/
+    
+    FeedActions.add_feed(({author, title, content, img}))
+    form.resetFields();
+    PostActions.close();
+  }
+  
+  handleTitle = (text) => {
+    PostActions.changeTitle(text);
+  }
+  
+  handleContent = (text) => {
+    PostActions.changeContent(text)
+  }
+  
+  handleImageFile = (file) => {
+    PostActions.uploadImageFile(file)
   }
   
   saveFormRef = (formRef) => {
@@ -41,12 +52,12 @@ class Post extends Component {
   }
   
   render() {
-    const { showModal, saveFormRef, handleCancel, handleCreate } = this;
+    const { showModal, saveFormRef, handleCancel, handleCreate, handleTitle, handleContent, handleImageFile} = this;
     const { visible } = this.props;
     
     return (
       <div>
-        <PostButton onClick={ showModal }/>
+        <PostButton onClick={showModal}/>
         <PostForm
           wrappedComponentRef={saveFormRef}
           visible={visible}
@@ -59,13 +70,10 @@ class Post extends Component {
 }
 
 export default connect(
-    /*
-
-    */
     ({post}) => ({
       author: post.get('author'),
       title: post.get('title'),
-      files: post.get('files'),
+      img: post.get('img'),
       content: post.get('content'),
       visible: post.get('visible'),
     })

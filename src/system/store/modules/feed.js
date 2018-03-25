@@ -30,13 +30,13 @@ const WRITE_COMMENT = 'comment/WRITE_COMMENT';
 }
 */
 // 2. Action 함수 정의하기
-export const change_comment = () => createAction(CHANGE_COMMENT);
-export const write_comment = () => createAction(WRITE_COMMENT);
-export const delete_comment = () => createAction(DELETE_COMMENT)
+export const change_comment = createAction(CHANGE_COMMENT);
+export const write_comment = createAction(WRITE_COMMENT);
+export const delete_comment = createAction(DELETE_COMMENT)
 
-export const click_like = () => createAction(CLICK_LIKE);
-export const add_feed = () => createAction(ADD_FEED);
-export const remove_feed = () => createAction(DELETE_FEED);
+export const click_like = createAction(CLICK_LIKE);
+export const add_feed = createAction(ADD_FEED);
+export const remove_feed = createAction(DELETE_FEED);
 
 // 모듈의 초기 상태를 정의합니다.
 const initialState = Map({
@@ -55,14 +55,14 @@ const Feed = Map({
     like_count: 0,
     comments: List(),
     comment_id: 0,
-})
+});
 
 const Comment = Map({
   id: 0,
   author: "",
   comment: "",
   create_at: new Date()
-})
+});
 
 // 3. Action 함수 핸들링 하기
 export default handleActions({
@@ -71,10 +71,12 @@ export default handleActions({
   
   // OK
   [ADD_FEED]: (state, action) => {
+    console.log(state)
+    console.log(action)
     const { author, title, content, img } = action.payload;
     const { feed_id } = state.get('feed_id');
     
-    const feed = Feed({
+    const feed = Map({
       id: feed_id+1, 
       author, 
       title, 

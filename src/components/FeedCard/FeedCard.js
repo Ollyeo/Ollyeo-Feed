@@ -20,7 +20,8 @@ const { Meta, Grid } = Card;
 
 class FeedCard extends Component{
     render() {
-        const { cover, 
+        const { id,
+        cover, 
         title, 
         description,
         my_avatar,
@@ -39,8 +40,11 @@ class FeedCard extends Component{
         const coverImg = <img src={cover}/>
         const myAvatarComponent = <Avatar src={my_avatar}/>
         
+        console.log("title : " + title)
+        console.log("description : " + description)
+        
         return (
-            <Card
+            <Card id={id}
                 cover={coverImg}
                 style = {{ width: 300 }}
                 actions={[myAvatarComponent, <Input placeholder="댓글을 입력해 주세요."/>, <FeedCardLike />]}
@@ -57,6 +61,7 @@ class FeedCard extends Component{
 }
 
 FeedCard.defaultProps = {
+    id:0,
     cover: {cover},
     title: "No Title", 
     description: "No Description",

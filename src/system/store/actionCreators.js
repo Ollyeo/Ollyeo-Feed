@@ -8,6 +8,7 @@ import store from './index';
 
 const { dispatch } = store;
 
+// Action 생성함수를 미리 Bind
 export const FeedActions = bindActionCreators(feedActions, dispatch);
 export const PostActions = bindActionCreators(postActions, dispatch);
 //export const FeeddetailActions = bindActionCreators(feeddetailActions, dispatch);

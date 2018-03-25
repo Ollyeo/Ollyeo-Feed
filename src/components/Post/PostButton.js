@@ -8,7 +8,7 @@ const PostButton = ({onClick}) => {
                 shape="circle" 
                 icon="plus-circle" 
                 size='small'
-                onClick={onClick()}/>
+                onClick={onClick}/>
     )    
 };
 

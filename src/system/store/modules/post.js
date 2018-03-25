@@ -18,9 +18,13 @@ const initialState = Map({
 });
 
 export default handleActions({
-  [OPEN]: (state, action) => { return state.update('visible', visible => !visible)},
+  [OPEN]: (state, action) => { 
+    console.log('wqeqewqe');
+    console.log(state)
+    console.log(action)
+    return state.update('visible', visible => true)},
   
   // OPEN과 같은 동작을 하지만 나중에 다른 기능이 추가 될 수도 있으니..
-  [CLOSE]: (state, action) => { return state.update('visible', visible => !visible)},
+  [CLOSE]: (state, action) => { return state.update('visible', visible => false)},
   
 }, initialState);

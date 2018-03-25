@@ -2,22 +2,31 @@ import React, { Component } from 'react';
 import PostForm from './PostForm';
 import PostButton from './PostButton';
 
+import { bindActionCreators } from 'redux';
+
 import { connect } from 'react-redux';
 
-import { FeedActions, PostActions } from 'system/store/actionCreators';
+//import { FeedActions, PostActions } from 'system/store/actionCreators';
+import * as feedActions from 'system/store/modules/feed'
+import * as postActions from 'system/store/modules/post'
 
 class Post extends Component {
  
   showModal = () => {
-    PostActions.open().then( () => console.log('success'))
-    .catch( () => console.log('error'));
+    console.log("showModal")
+    const { PostActions } = this.props;
+    
+    PostActions.open();
   }
+  
   handleCancel = () => {
+    const { PostActions } = this.props;
     PostActions.close();
   }
   
   handleCreate = () => {
     const { author, title, img, content } = this.props;
+    const { PostActions, FeedActions } = this.props;
     
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
@@ -42,7 +51,7 @@ class Post extends Component {
     
     return (
       <div>
-        <PostButton onClick={() => { showModal }}/>
+        <PostButton onClick={ showModal }/>
         <PostForm
           wrappedComponentRef={saveFormRef}
           visible={visible}
@@ -65,4 +74,8 @@ export default connect(
       content: post.get('content'),
       visible: post.get('visible'),
     }),
+    (dispatch) => ({
+        FeedActions: bindActionCreators(feedActions, dispatch),
+        PostActions: bindActionCreators(postActions, dispatch)
+    })
 )(Post);

@@ -13,6 +13,14 @@ class PostForm extends Component {
       return e && e.fileList;
     }
     
+    createFeed = () => {
+        const  { author, 
+    title,
+    img ,
+    content,
+    visible} = this.props;
+    }
+    
     render() {
         const { visible, onCancel, onCreate, form } = this.props;
         const { getFieldDecorator } = form;

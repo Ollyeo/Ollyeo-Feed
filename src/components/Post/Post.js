@@ -6,27 +6,22 @@ import { bindActionCreators } from 'redux';
 
 import { connect } from 'react-redux';
 
-//import { FeedActions, PostActions } from 'system/store/actionCreators';
-import * as feedActions from 'system/store/modules/feed'
-import * as postActions from 'system/store/modules/post'
+import { FeedActions, PostActions } from 'system/store/actionCreators';
 
 class Post extends Component {
  
   showModal = () => {
     console.log("showModal")
-    const { PostActions } = this.props;
     
     PostActions.open();
   }
   
   handleCancel = () => {
-    const { PostActions } = this.props;
     PostActions.close();
   }
   
   handleCreate = () => {
     const { author, title, img, content } = this.props;
-    const { PostActions, FeedActions } = this.props;
     
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
@@ -73,9 +68,5 @@ export default connect(
       files: post.get('files'),
       content: post.get('content'),
       visible: post.get('visible'),
-    }),
-    (dispatch) => ({
-        FeedActions: bindActionCreators(feedActions, dispatch),
-        PostActions: bindActionCreators(postActions, dispatch)
     })
 )(Post);

@@ -19,6 +19,8 @@ class Post extends Component {
   handleCreate = () => {
     const { author, title, content, img } = this.props;
     
+    console.log(author, title, content, img)
+    
     const form = this.formRef.props.form;
     /*
     form.validateFields((err, values) => {
@@ -36,15 +38,16 @@ class Post extends Component {
   }
   
   handleTitle = (text) => {
+    console.log("handleTitle : " + text);
     PostActions.changeTitle(text);
   }
   
   handleContent = (text) => {
-    PostActions.changeContent(text)
+    PostActions.changeContent(text);
   }
   
   handleImageFile = (file) => {
-    PostActions.uploadImageFile(file)
+    PostActions.uploadImageFile(file);
   }
   
   saveFormRef = (formRef) => {
@@ -63,6 +66,9 @@ class Post extends Component {
           visible={visible}
           onCancel={handleCancel}
           onCreate={handleCreate}
+          titleChange={handleTitle}
+          contentChange={handleContent}
+          upload={handleImageFile}
         />
       </div>
     );

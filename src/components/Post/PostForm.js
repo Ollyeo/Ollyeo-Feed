@@ -5,6 +5,7 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 
 class PostForm extends Component {
+
     normFile = (e) => {
       console.log('Upload event:', e);
       if (Array.isArray(e)) {
@@ -13,17 +14,10 @@ class PostForm extends Component {
       return e && e.fileList;
     }
     
-    createFeed = () => {
-        const  { author, 
-                title,
-                img ,
-                content,
-                visible} = this.props;
-    }
-    
     render() {
         const { visible, onCancel, onCreate, form } = this.props;
-        const { getFieldDecorator } = form;
+        const { handleTitle, handleContent, handleImageFile } = this.props;
+        const { getFieldDecorator, getFieldError } = form;
         const formItemLayout = {
             labelCol: { span: 6 },
             wrapperCol: { sapn: 14 },
@@ -54,7 +48,8 @@ class PostForm extends Component {
                 <FormItem label="Description">
                     {getFieldDecorator('description')
                     (<TextArea placeholder="Autosize height with minimum and maximum number of lines" 
-                                autosize={{ minRows: 2, maxRows: 6 }} />)}
+                                autosize={{ minRows: 2, maxRows: 6 }}
+                               />)}
                 </FormItem>
                 <FormItem
                   {...formItemLayout}
@@ -89,5 +84,27 @@ PostForm.defaultProps = {
     visible: false,
 };
 
-export default Form.create()(PostForm);
+export default Form.create({
+    onFieldsChange(props, changedFields){
+        console.log(changedFields);
+        //if(changedFields.title.value !== undefined)
+        //props.titleChange(changedFields.title.value);
+    },
+    
+    mapPropsToFields(props){
+        console.log("mapPropsToFields");
+        console.log(props);
+        return {
+            
+        }
+    },
+    
+    onValuesChange(props, values){
+        console.log("onValuesChange");
+        console.log(values);
+        props.titleChange(values.title);
+        //props.titleChange(values.title);
+    }
+    
+})(PostForm);
  

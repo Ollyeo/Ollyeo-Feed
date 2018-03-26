@@ -31,9 +31,9 @@ export default handleActions({
   [CLOSE]: (state, action) => { return state.update('visible', visible => false)},
   
   /* TODO */
-  [CHANGE_TITLE]: (state, action) => { return state.update('title', text => text)},
+  [CHANGE_TITLE]: (state, {payload: title}) => { return state.set('title', text => title)},
   
-  [CHANGE_CONTENT]: (state, action) => { return state.update('content', text => text)},
+  [CHANGE_CONTENT]: (state, {payload: content}) => { return state.set('content', text => content)},
   
   [UPLOAD_IMAGE]: (state, action) => { return state.set('img', img => img)},
   

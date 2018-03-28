@@ -14,9 +14,29 @@ class PostForm extends Component {
       return e && e.fileList;
     }
     
+    handleTitleInputChange = (value) => {
+        const { setFieldsValue } = this.props.form;
+        const { handleTitle, onChange } = this.props;
+        
+        if(onChange){
+            console.log(value);
+            console.log(onChange);
+        }
+        
+        
+        //console.log(value);
+        
+        setFieldsValue({
+            Title: value,
+        });
+        
+        handleTitle(value);
+    }
+    
     render() {
-        const { visible, onCancel, onCreate, form } = this.props;
+        const { visible, onCancel, onCreate, form, title } = this.props;
         const { handleTitle, handleContent, handleImageFile } = this.props;
+        const { handleTitleInputChange } = this
         const { getFieldDecorator, getFieldError } = form;
         const formItemLayout = {
             labelCol: { span: 6 },
@@ -42,7 +62,7 @@ class PostForm extends Component {
                                         }
                                     ],
                         })
-                        (<Input />)
+                        (<Input onChange={handleTitleInputChange}/>)
                     }
                 </FormItem>
                 <FormItem label="Description">
@@ -86,7 +106,7 @@ PostForm.defaultProps = {
 
 export default Form.create({
     onFieldsChange(props, changedFields){
-        console.log(changedFields);
+        console.log(changedFields.title.value);
         //if(changedFields.title.value !== undefined)
         //props.titleChange(changedFields.title.value);
     },
@@ -95,14 +115,14 @@ export default Form.create({
         console.log("mapPropsToFields");
         console.log(props);
         return {
-            
+            title:props.title    
         }
     },
     
     onValuesChange(props, values){
         console.log("onValuesChange");
         console.log(values);
-        props.titleChange(values.title);
+        //props.titleChange(values.title);
         //props.titleChange(values.title);
     }
     

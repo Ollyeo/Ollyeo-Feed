@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Form, Icon, Upload, Input } from 'antd'
+import { createForm, createFormField } from 'rc-form';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -26,11 +27,11 @@ class PostForm extends Component {
         
         //console.log(value);
         
-        setFieldsValue({
-            Title: value,
-        });
+        //setFieldsValue({
+        //    Title: value,
+        //});
         
-        handleTitle(value);
+        //handleTitle(value);
     }
     
     render() {
@@ -62,7 +63,7 @@ class PostForm extends Component {
                                         }
                                     ],
                         })
-                        (<Input onChange={handleTitleInputChange}/>)
+                        (<Input />)
                     }
                 </FormItem>
                 <FormItem label="Description">
@@ -106,22 +107,24 @@ PostForm.defaultProps = {
 
 export default Form.create({
     onFieldsChange(props, changedFields){
+        console.log(props);
+        props.titleChange(changedFields.title.value);
         console.log(changedFields.title.value);
         //if(changedFields.title.value !== undefined)
         //props.titleChange(changedFields.title.value);
     },
     
     mapPropsToFields(props){
-        console.log("mapPropsToFields");
+        //console.log("mapPropsToFields");
         console.log(props);
         return {
-            title:props.title    
-        }
+            title:createFormField(props.title),    
+        };
     },
     
     onValuesChange(props, values){
-        console.log("onValuesChange");
-        console.log(values);
+        //console.log("onValuesChange");
+        //console.log(values);
         //props.titleChange(values.title);
         //props.titleChange(values.title);
     }

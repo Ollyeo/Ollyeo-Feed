@@ -38,7 +38,8 @@ class Post extends Component {
   }
   
   handleTitle = (text) => {
-    console.log("handleTitle : " + text);
+    console.log("handleTitle : ");
+    console.log(text);
     PostActions.changeTitle(text);
   }
   
@@ -56,7 +57,7 @@ class Post extends Component {
   
   render() {
     const { showModal, saveFormRef, handleCancel, handleCreate, handleTitle, handleContent, handleImageFile} = this;
-    const { visible } = this.props;
+    const { visible, author, title, img, content } = this.props;
     
     return (
       <div>
@@ -69,6 +70,10 @@ class Post extends Component {
           titleChange={handleTitle}
           contentChange={handleContent}
           upload={handleImageFile}
+          author={author}
+          title={title}
+          img={img}
+          content={content}
         />
       </div>
     );

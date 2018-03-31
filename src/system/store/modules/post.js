@@ -11,16 +11,16 @@ const UPLOAD_IMAGE = 'post/UPLOAD_IMAGE'
 export const open = createAction(OPEN);
 export const close = createAction(CLOSE);
 export const changeTitle = createAction(CHANGE_TITLE);
-export const changeDescription = createAction(CHANGE_CONTENT);
+export const changeContent = createAction(CHANGE_CONTENT);
 export const uploadImage = createAction(UPLOAD_IMAGE);
 
 // Record 함수는 Record 형태 데이터를 만드는 함수를 반환합니다.
 // 따라서, 만든 다음에 뒤에 () 를 붙여줘야 데이터가 생성됩니다.
 const initialState = Map({
-  author: '',
-  title: '',
+  author: "",
+  title: "",
   img: null,
-  content: '',
+  content: "",
   visible: false
 });
 
@@ -31,7 +31,7 @@ export default handleActions({
   [CLOSE]: (state, action) => { return state.update('visible', visible => false)},
   
   /* TODO */
-  [CHANGE_TITLE]: (state, {payload: title}) => { return state.set('title', title)},
+  [CHANGE_TITLE]: (state, {payload: title}) => { return state.set('title', title) },
   
   [CHANGE_CONTENT]: (state, {payload: content}) => { return state.set('content', content)},
   

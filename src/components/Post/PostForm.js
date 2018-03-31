@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Form, Icon, Upload, Input } from 'antd'
-import { createForm, createFormField } from 'rc-form';
+//import { createForm, createFormField } from 'rc-form';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -14,30 +14,10 @@ class PostForm extends Component {
       }
       return e && e.fileList;
     }
-    
-    handleTitleInputChange = (value) => {
-        const { setFieldsValue } = this.props.form;
-        const { handleTitle, onChange } = this.props;
-        
-        if(onChange){
-            console.log(value);
-            console.log(onChange);
-        }
-        
-        
-        //console.log(value);
-        
-        //setFieldsValue({
-        //    Title: value,
-        //});
-        
-        //handleTitle(value);
-    }
-    
+
     render() {
         const { visible, onCancel, onCreate, form, title } = this.props;
         const { handleTitle, handleContent, handleImageFile } = this.props;
-        const { handleTitleInputChange } = this
         const { getFieldDecorator, getFieldError } = form;
         const formItemLayout = {
             labelCol: { span: 6 },
@@ -66,8 +46,8 @@ class PostForm extends Component {
                         (<Input />)
                     }
                 </FormItem>
-                <FormItem label="Description">
-                    {getFieldDecorator('description')
+                <FormItem label="content">
+                    {getFieldDecorator('content')
                     (<TextArea placeholder="Autosize height with minimum and maximum number of lines" 
                                 autosize={{ minRows: 2, maxRows: 6 }}
                                />)}
@@ -107,26 +87,34 @@ PostForm.defaultProps = {
 
 export default Form.create({
     onFieldsChange(props, changedFields){
-        console.log(props);
-        props.titleChange(changedFields.title.value);
-        console.log(changedFields.title.value);
-        //if(changedFields.title.value !== undefined)
-        //props.titleChange(changedFields.title.value);
+        console.log(changedFields)
+        
+        if(changedFields.title !== undefined)
+        {
+            props.titleChange(changedFields.title.value);
+        }
+        
+        if(changedFields.content !== undefined)
+        {
+            props.contentChange(changedFields.content.value);
+        }   
+        //if (changedFields.dragger != undefined)
+        //    props.titleChange(changedFields.dragger.value);
     },
     
     mapPropsToFields(props){
-        //console.log("mapPropsToFields");
-        console.log(props);
+        const title = props.title;
+        const content = props.content;
+        //const title = props.title;
+        
         return {
-            title:createFormField(props.title),    
+            title : Form.createFormField({ value : title }),
+            content : Form.createFormField({ value : content }), 
         };
     },
     
     onValuesChange(props, values){
-        //console.log("onValuesChange");
-        //console.log(values);
-        //props.titleChange(values.title);
-        //props.titleChange(values.title);
+
     }
     
 })(PostForm);

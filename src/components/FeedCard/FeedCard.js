@@ -21,9 +21,8 @@ const { Meta, Grid } = Card;
 class FeedCard extends Component{
     render() {
         const { id,
-        cover, 
         title, 
-        description,
+        content,
         my_avatar,
         author_avatar,
         top_comment
@@ -41,7 +40,7 @@ class FeedCard extends Component{
         const myAvatarComponent = <Avatar src={my_avatar}/>
         
         console.log("title : " + title)
-        console.log("description : " + description)
+        console.log("content : " + content)
         
         return (
             <Card id={id}
@@ -52,7 +51,7 @@ class FeedCard extends Component{
                 <Meta
                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                     title={title}
-                    description={description}
+                    description={content}
                 />
                 {comments}
             </Card>
@@ -64,7 +63,7 @@ FeedCard.defaultProps = {
     id:0,
     cover: {cover},
     title: "No Title", 
-    description: "No Description",
+    content: "No Description",
     my_avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
     author_avatar : {avatar},
     top_comment: List()

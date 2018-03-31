@@ -3,7 +3,6 @@ import PostForm from './PostForm';
 import PostButton from './PostButton';
 
 import { connect } from 'react-redux';
-
 import { FeedActions, PostActions } from 'system/store/actionCreators';
 
 class Post extends Component {
@@ -19,7 +18,7 @@ class Post extends Component {
   handleCreate = () => {
     const { author, title, content, img } = this.props;
     
-    console.log(author, title, content, img)
+    console.log(title, content)
     
     const form = this.formRef.props.form;
     /*
@@ -33,18 +32,19 @@ class Post extends Component {
     });*/
     
     FeedActions.add_feed(({author, title, content, img}))
+    
     form.resetFields();
     PostActions.close();
   }
   
   handleTitle = (text) => {
-    console.log("handleTitle : ");
-    console.log(text);
     PostActions.changeTitle(text);
+    console.log(this.props.title)
   }
   
   handleContent = (text) => {
     PostActions.changeContent(text);
+    console.log(this.props.content)
   }
   
   handleImageFile = (file) => {

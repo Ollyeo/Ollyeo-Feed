@@ -12,17 +12,17 @@ class FeedContainer extends Component {
         const { feed_id, comment_input, feeds } = this.props;
         
         const feedItems = feeds.toJS().map(
-            ({cover, 
+            ({img, 
             title, 
-            description, 
+            content, 
             my_avatar,
             author_avatar}, key) => (
-                console.log(title),
+                console.log(img),
                 <FeedCard 
                     key={key}
-                    cover={cover} 
+                    cover={img} 
                     title={title} 
-                    description={description} 
+                    content={content} 
                     my_avatar={my_avatar}
                     author_avatar={author_avatar}
                 />

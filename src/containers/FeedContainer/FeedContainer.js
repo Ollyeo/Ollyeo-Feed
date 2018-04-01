@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Infinite from 'react-infinite';
+
 import { FeedCard } from 'components/'
 
 import { connect } from 'react-redux';
@@ -8,6 +10,7 @@ import  * as feedActions from 'system/store/modules/feed';
 
 // static
 class FeedContainer extends Component {
+    
     render(){
         const { feed_id, comment_input, feeds } = this.props;
         
@@ -30,9 +33,9 @@ class FeedContainer extends Component {
         );
         
         return(
-            <div>
+            <Infinite containerHeight={1000} elementHeight={120}>
                 {feedItems}
-            </div>
+            </Infinite>
         )
     }
 }

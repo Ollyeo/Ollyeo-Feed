@@ -1,5 +1,6 @@
-import FeedContainer from './FeedContainer/FeedContainer'
+const req = require.context('.', false, /^((?!index).)*\.js$/)
 
-export {
-    FeedContainer,
-}
+req.keys().forEach((key) => {
+  const containerName = key.replace(/^\.\/([^.]+)\.js$/, '$1')
+  module.exports[containerName] = req(key).default
+})

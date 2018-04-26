@@ -19,14 +19,23 @@ const { Meta, Grid } = Card;
 //기본 Meta이외의 데이터를 넣고 싶을때는 Card.Grid를 이용해서 추가해 보자.
 
 class FeedCard extends Component{
+    
+    state = {
+        comment: '',
+        update: false
+    }
+    
     render() {
         const { id,
         title, 
         content,
         my_avatar,
         author_avatar,
-        top_comment
+        top_comment,
+        onPressEnter
         } = this.props;
+        
+        const { comment } = this.state;
         
         const comments = top_comment.map(
             ({avatar, comment}) => (
@@ -46,7 +55,10 @@ class FeedCard extends Component{
             <Card id={id}
                 cover={coverImg}
                 style = {{ width: 300 }}
-                actions={[myAvatarComponent, <Input placeholder="댓글을 입력해 주세요."/>, <FeedCardLike />]}
+                actions={[myAvatarComponent,
+                <Input placeholder="댓글을 입력해 주세요." 
+                        onPressEnter={ () => onPressEnter({id}, {comment}, "Hyunseo") }/>, 
+                <FeedCardLike />]}
             >
                 <Meta
                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}

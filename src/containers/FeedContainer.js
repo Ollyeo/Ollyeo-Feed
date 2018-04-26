@@ -33,7 +33,7 @@ class FeedContainer extends Component {
         );
         
         return(
-            <Infinite containerHeight={1000} elementHeight={120}>
+            <Infinite containerHeight={700} elementHeight={120}>
                 {feedItems}
             </Infinite>
         )

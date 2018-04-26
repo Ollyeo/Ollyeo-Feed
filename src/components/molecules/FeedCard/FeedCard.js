@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import FeedCardLike from './FeedCardLike';
-import FeedCardComment from './FeedCardComment';
+import { FeedCardLike } from 'components';
+import { FeedCardComment } from 'components';
 
 import { List } from 'immutable';
 

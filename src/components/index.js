@@ -1,10 +1,6 @@
-import App from './App/App.js'
-import FeedCard from './FeedCard/FeedCard.js'
-//import { DetailCard } from './DetailCard/DetailCard'
-import Post from './Post/Post'
+const req = require.context('.', true, /\.\/[^/]+\/[^/]+\/index\.js$/)
 
-export {
-    App,
-    FeedCard,
-    Post
-}
+req.keys().forEach((key) => {
+  const componentName = key.replace(/^.+\/([^/]+)\/index\.js/, '$1')
+  module.exports[componentName] = req(key).default
+})

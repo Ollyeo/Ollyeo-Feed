@@ -37,4 +37,6 @@ export default handleActions({
   
   [UPLOAD_IMAGE]: (state, action) => { return state.set('img', img => img)},
   
+  
+  
 }, initialState);

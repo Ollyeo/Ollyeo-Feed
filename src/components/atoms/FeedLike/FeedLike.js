@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'antd';
 
-const FeedCardLike = ({haslike}) => {
+const FeedLike = ({haslike}) => {
     const type_name = haslike ? "heart-o" : "heart";
     
     return (
@@ -9,4 +9,4 @@ const FeedCardLike = ({haslike}) => {
     )
 }
 
-export default FeedCardLike;
+export default FeedLike;

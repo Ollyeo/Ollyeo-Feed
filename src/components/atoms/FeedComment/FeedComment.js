@@ -3,7 +3,7 @@ import { Avatar, Row, Col } from 'antd'
 
 // Gutter => column과 column 사이의 간격정도
 
-const FeedCardComment = ({avatar, comment}) => {
+const FeedComment = ({avatar, comment}) => {
     return (
         <div className="gutter">
             <Row gutter={48}>
@@ -18,4 +18,4 @@ const FeedCardComment = ({avatar, comment}) => {
     )
 }
 
-export default FeedCardComment;
+export default FeedComment;

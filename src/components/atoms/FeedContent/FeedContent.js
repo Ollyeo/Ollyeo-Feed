@@ -1,11 +1,12 @@
-/*
 import React from 'react'
 import { Image } from 'antd';
 
-const FeedCardContent = () => {
+const FeedContent = ({content}) => {
     return (
+        <div>
+            <strong>{content}</strong>
+        </div>
     )
 }
 
-export default FeedCardContent;
-*/
+export default FeedContent;

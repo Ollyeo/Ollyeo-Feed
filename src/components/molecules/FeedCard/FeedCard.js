@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { FeedCardLike } from 'components';
-import { FeedCardComment } from 'components';
+import { FeedLike, FeedComment, FeedHeader, 
+        FeedImage, FeedContent, FeedCommentInput } from 'components';
 
 import { List } from 'immutable';
 
@@ -45,25 +45,22 @@ class FeedCard extends Component{
             )
         );
         
-        const coverImg = <img src={cover}/>
         const myAvatarComponent = <Avatar src={my_avatar}/>
-        
-        console.log("title : " + title)
-        console.log("content : " + content)
-        
+
         return (
             <Card id={id}
-                cover={coverImg}
+                cover={<FeedImage src={cover}/>}
                 style = {{ width: 300 }}
                 actions={[myAvatarComponent,
-                <Input placeholder="댓글을 입력해 주세요." 
-                        onPressEnter={ () => onPressEnter({id}, {comment}, "Hyunseo") }/>, 
-                <FeedCardLike />]}
+                    <Input placeholder="댓글을 입력해 주세요." 
+                            onPressEnter={ () => onPressEnter({id}, {comment}, "Hyunseo") }/>, 
+                    <FeedLike />
+                ]}
             >
                 <Meta
                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                     title={title}
-                    description={content}
+                    description={<FeedContent content={content}/>}
                 />
                 {comments}
             </Card>

@@ -1,7 +1,7 @@
 import React from 'react';
-import { App } from 'components/App';
+import { App } from 'components';
 import { Provider } from 'react-redux';
-import store from './system/store';
+import store from 'store';
 
 // react-router-dom
 // react-ga => react google analystics

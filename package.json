@@ -34,5 +34,6 @@
   },
   "devDependencies": {
     "react-app-rewired": "^1.5.0"
-  }
+  },
+  "theme": "./theme.js"
 }

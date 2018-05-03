@@ -7,5 +7,3 @@ export const createFeed = ({tocken,
                             content,
                             upload,
 }) => axios.post('api/v0.1/Feed', {tocken, title, content, upload});
-
-

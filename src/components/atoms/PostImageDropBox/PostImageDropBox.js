@@ -1,6 +1,8 @@
 import React from 'react';
+import { Upload, Icon } from 'antd';
 
 const PostImageDropBox = () => {
+    
     return(
         <Upload.Dragger name='files' action='/upload.do'>
             <p className="ant-upload-drag-icon">
